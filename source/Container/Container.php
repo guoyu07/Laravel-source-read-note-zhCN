@@ -29,6 +29,7 @@ class Container implements ArrayAccess, ContainerContract
 //---------------------------------------------------------------------------------------------------------
     /**
      * The container's bindings.
+     * 容器的绑定。
      *
      * @var array
      */
