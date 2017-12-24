@@ -211,6 +211,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Register a binding with the container.
+     * 注册与容器的绑定。
      *
      * @param  string|array  $abstract
      * @param  \Closure|string|null  $concrete
@@ -222,6 +223,7 @@ class Container implements ArrayAccess, ContainerContract
         // If no concrete type was given, we will simply set the concrete type to the
         // abstract type. After that, the concrete type to be registered as shared
         // without being forced to state their classes in both of the parameters.
+        // 如果没有给定具体类型，我们将简单地将具体类型设置为抽象类型。 之后，具体类型被注册为共享，而不需要在两个参数中声明它们的类。
         $this->dropStaleInstances($abstract);
 
         if (is_null($concrete)) {
@@ -231,6 +233,7 @@ class Container implements ArrayAccess, ContainerContract
         // If the factory is not a Closure, it means it is just a class name which is
         // bound into this container to the abstract type and we will just wrap it
         // up inside its own Closure to give us more convenience when extending.
+        // 如果工厂不是一个Closure，这意味着它只是一个类名，它被绑定到这个容器中的抽象类型，我们将它包装在它自己的Closure中，以便在扩展时给我们更多的方便。
         if (! $concrete instanceof Closure) {
             $concrete = $this->getClosure($abstract, $concrete);
         }
@@ -328,6 +331,9 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Register a shared binding in the container.
+     * 在容器中注册共享绑定。
+     * (单例)
+     * 既然是共享绑定，那么必然是唯一，否则不叫共享绑定，如果唯一，那么就需要单例模式
      *
      * @param  string|array  $abstract
      * @param  \Closure|string|null  $concrete
